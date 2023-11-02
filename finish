@@ -1,0 +1,10 @@
+. env.sh
+
+rm -rfv $LFS/cscripts
+rm -rfv $LFS/tmp/*
+
+mkdir $LFS/sources
+
+dd if=/dev/zero of=$LFS/zero bs=16384 status=progress
+sleep 5
+rm -v $LFS/zero

@@ -1,0 +1,16 @@
+cat > /etc/profile.d/ulfs.sh << "EOF"
+export UMVIRT_RELEASE=0.2
+export UMVIRT_ASSISTANT_URL=https://umvirt.com/linux/assistant/
+export UMVIRT_PACKAGES_URL=https://umvirt.com/linux/packages/
+export MAKEFLAGS="-j`nproc`"
+export NINJAJOBS=`nproc`
+EOF
+
+mkdir -v /etc/ulfs-packages
+
+cat > /etc/ulfs-packages/config << "EOF"
+ULFS_PKG_DOCUMENTATION=NO
+ULFS_PKG_STATIC=NO
+EOF
+
+

@@ -1,0 +1,14 @@
+#Force DHCP
+cat > /etc/systemd/network/10-eth-dhcp.network << "EOF"
+[Match]
+Name=eth0
+[Network]
+DHCP=ipv4
+
+[DHCPv4]
+UseDomains=true
+EOF
+
+#Force using eth0
+#https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/
+ln -s /dev/null /etc/udev/rules.d/80-net-setup-link.rules

@@ -1,0 +1,3 @@
+. env.sh
+
+rm -rfv $LFS/sources

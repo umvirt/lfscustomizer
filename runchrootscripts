@@ -1,0 +1,62 @@
+if [ "$USER" != "root" ] ; then 
+
+echo "WRONG USER"
+
+exit
+
+fi
+
+mkdir builddir/cscripts
+cp -rv cscripts/* builddir/cscripts
+cp -rv cscripts.config/* builddir/cscripts
+sleep 20
+
+echo "5"> log/last_script.files
+
+
+date +%s > log/_cscripts.start
+
+for s in `ls cscripts` ; do
+
+
+LASTFILES=`cat log/last_script.files`
+
+#echo $LASTFILES
+
+if [[ $LASTFILES -lt 1 ]] ; then
+
+echo "ERROR: Last script files: $LASTFILES"
+exit
+
+fi
+
+echo "Running in chroot: $s"
+sleep 1
+
+date +%s > log/$s.start
+
+echo $s > log/current_script
+
+./chrootcmd /cscripts/$s | tee log/$s.log
+
+
+date +%s > log/$s.end
+
+find builddir/bin -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/etc -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/lib -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/lib64 -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/sbin -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/tools -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/usr -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/var -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/tmp -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+find builddir/boot -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
+
+wc -l log/$s.files | awk '{print $1}' > log/last_script.files
+
+done
+
+date +%s > log/_cscripts.end
+
+rm log/current_script

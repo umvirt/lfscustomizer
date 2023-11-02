@@ -1,0 +1,18 @@
+showfile (){
+
+echo "$1"
+echo "---"
+cat $1
+echo "---"
+echo ""
+}
+
+
+echo "Current configuration"
+echo "---------------------"
+echo
+
+showfile "env.sh"
+showfile "userenv.sh"
+showfile "cscripts.config/config.sh"
+showfile "cscripts.config/env.sh"

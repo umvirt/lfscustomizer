@@ -1,0 +1,2 @@
+echo "ulfs" > /etc/hostname
+

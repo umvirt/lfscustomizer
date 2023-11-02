@@ -1,0 +1,20 @@
+#lfs-release
+echo 12.0-systemd > /etc/lfs-release
+
+#lsb
+cat > /etc/lsb-release << "EOF"
+DISTRIB_ID="UmVirt Linux From Scratch"
+DISTRIB_RELEASE="0.2"
+DISTRIB_CODENAME="Duckling"
+DISTRIB_DESCRIPTION="UmVirt Linux From Scratch"
+EOF
+
+#os
+cat > /etc/os-release << "EOF"
+NAME="UmVirt Linux From Scratch"
+VERSION="0.2"
+ID=lfs
+PRETTY_NAME="UmVirt Linux From Scratch 0.2 Duckling"
+VERSION_CODENAME="Duckling"
+EOF
+

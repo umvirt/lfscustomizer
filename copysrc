@@ -1,0 +1,5 @@
+. env.sh
+
+mkdir -v $LFS/sources
+chmod -v a+wt $LFS/sources
+cp -v src/* $LFS/sources
