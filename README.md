@@ -10,7 +10,10 @@ License: GPL
 
 Linux From Scratch (LFS) to UmVirt Linux From Scratch (ULFS) customizer.
 
-Umvirt LFS customizer perform basic configuration and install base software which needed to run ULFS Packages.
+Umvirt LFS Customizer can perform: 
+
+* Basic configuration and install base software which needed to run ULFS Packages.
+* ULFS packages set installation
 
 Source code: [https://gitlab.com/Umvirt/lfscustomizer](https://gitlab.com/Umvirt/lfscustomizer)
 
@@ -29,4 +32,26 @@ Kernel sources is placed on */usr/src*
 
 ## Running
 
+### LFS Customization
+
 Just run *autoconfig* script.
+
+### Install packages set
+
+To install packages use *installpackages* script.
+
+Syntax
+
+    ./installpackages <packages set>
+
+Example
+
+    ./installpackages console
+
+This script is install console packages set
+
+### Local repository support
+
+If you wan to install packages from local repository edit env.sh file.
+
+Set "YES" as LOCALREPO value and set your ULFS local repo IP-address on LOCALREPOIP value.

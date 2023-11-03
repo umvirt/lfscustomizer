@@ -1,0 +1,39 @@
+PKGSET=$1
+echo $PKGSET
+sleep 10
+
+. env.sh
+
+mount /dev/sda1 builddir
+./chrootmount
+
+#Backup original resolv.conf
+mv -v builddir/etc/resolv.conf builddir/etc/resolv.conf.real
+cp -v builddir/etc/hosts builddir/etc/hosts.real
+
+#Create fake resolv.conf
+cp -v /etc/resolv.conf builddir/etc
+#Create fake hosts file
+if [[ "$LOCALREPO" == "YES" ]]
+then
+
+echo "$LOCALREPOIP umvirt.com" >> /etc/hosts
+
+fi
+
+cp -v packages/$1.sh builddir/sources
+
+sleep 10
+
+./chrootcmd ./sources/$1.sh
+
+sleep 10
+
+#Restore original resolv.conf
+mv -v  builddir/etc/resolv.conf.real builddir/etc/resolv.conf
+mv -v  builddir/etc/hosts.real builddir/etc/hosts
+
+./deletesrc
+./chrootumount
+./finish
+

@@ -3,6 +3,8 @@
 PWD=`pwd`
 LFS="$PWD/builddir"
 MAKEFLAGS="-j`nproc`"
+LOCALREPO=NO
+LOCALREPOIP=127.0.0.1
 
 echo $LFS
 
