@@ -8,6 +8,6 @@ insmod ext2
 set root=(hd0,1)
 
 menuentry "Umvirt Linux From Scratch 0.2" {
-        linux   /boot/vmlinuz-6.4.12-lfs-12.0-systemd root=/dev/sda1 ro
+        linux   /boot/vmlinuz root=/dev/sda1 ro
 }
 EOF
