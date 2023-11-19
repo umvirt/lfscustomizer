@@ -47,7 +47,6 @@ find builddir/etc -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.fil
 find builddir/lib -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
 find builddir/lib64 -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
 find builddir/sbin -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
-find builddir/tools -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
 find builddir/usr -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
 find builddir/var -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
 find builddir/tmp -type f -newer log/$s.start \! -newer log/$s.end >> log/$s.files
