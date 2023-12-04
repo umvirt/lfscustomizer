@@ -1,4 +1,4 @@
 cat > /etc/locale.conf << "EOF"
 LANG=en_US.utf8
-LC_CTYPE=utf8
+LC_CTYPE=en_US.utf8
 EOF
