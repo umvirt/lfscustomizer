@@ -37,7 +37,7 @@ date +%s > log/$s.start
 
 echo $s > log/current_script
 
-./chrootcmd /cscripts/$s | tee log/$s.log
+./chrootcmd /cscripts/$s  2>&1 | tee log/$s.log
 
 
 date +%s > log/$s.end
