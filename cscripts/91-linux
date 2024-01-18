@@ -37,6 +37,9 @@ cp -v /sources/config.amd64 .config
 
 fi
 
+if [[ "$KERNEL_AUFS" != "YES" ]]
+then
+
 
 echo "$ARCH make" >> kernelbuilder
 
@@ -47,6 +50,21 @@ chmod +x kernelbuilder
 cat kernelbuilder
 
 ./kernelbuilder
+
+else
+
+../aufs/aufs_install
+
+echo "$ARCH make modules_install" >> kernelbuilder
+
+chmod +x kernelbuilder
+
+cat kernelbuilder
+
+./kernelbuilder
+
+fi
+
 
 cp -v arch/x86/boot/bzImage /boot/vmlinuz
 
