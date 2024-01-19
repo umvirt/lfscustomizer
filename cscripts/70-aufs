@@ -51,8 +51,14 @@ ARCH="ARCH=i386"
 
 fi
 
-#echo "$ARCH make " > aufskernelbuilder
-echo "yes '' | \$ARCH make" > aufskernelbuilder
+#bugfix
+#sed: can't read modules.order: No such file or directory
+echo "sed \"s/CONFIG_SYSTEM_TRUSTED_KEYS/\\#CONFIG_SYSTEM_TRUSTED_KEYS/\" -i .config " > aufskernelbuilder
+
+
+echo "yes '' | $ARCH make" >> aufskernelbuilder
+
+
 echo "$ARCH make headers_install" >> aufskernelbuilder
 chmod +x aufskernelbuilder
 ./aufskernelbuilder
