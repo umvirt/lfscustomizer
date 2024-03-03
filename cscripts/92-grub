@@ -9,7 +9,7 @@ insmod part_gpt
 insmod ext2
 set root=(hd0,1)
 
-menuentry "Umvirt Linux From Scratch 0.2" {
+menuentry "Umvirt Linux From Scratch 0.2.1" {
         linux   /boot/vmlinuz root=/dev/sda1 ro  console=ttyS0 console=tty0
 }
 EOF
@@ -33,7 +33,7 @@ terminal_output gfxterm
 fi
 
 
-menuentry "Umvirt Linux From Scratch 0.2" {
+menuentry "Umvirt Linux From Scratch 0.2.1" {
         linux   /boot/vmlinuz root=/dev/sda1 ro console=ttyS0 console=tty0
 }
 
