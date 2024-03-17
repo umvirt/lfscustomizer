@@ -17,7 +17,7 @@ cp -v /etc/resolv.conf builddir/etc
 if [[ "$LOCALREPO" == "YES" ]]
 then
 
-echo "$LOCALREPOIP umvirt.com" >> /etc/hosts
+echo "$LOCALREPOIP umvirt.com" >> builddir/etc/hosts
 
 fi
 
