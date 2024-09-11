@@ -1,6 +1,6 @@
 . /cscripts/env.sh
 
-cd /usr/src/linux-6.7.4
+cd /usr/src/linux-6.10.5
 
 #FORCING ARCH 
 ARCH=""
@@ -39,6 +39,14 @@ fi
 
 if [[ "$KERNEL_AUFS" != "YES" ]]
 then
+
+#reinstall headers
+
+make mrproper
+
+make headers
+find usr/include -type f ! -name '*.h' -delete
+cp -rv usr/include $LFS/usr
 
 
 echo "$ARCH make" >> kernelbuilder
