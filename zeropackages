@@ -1,0 +1,2 @@
+cd builddir/var/log/ulfs-packages
+wc -l */files.txt | grep " 0"
