@@ -17,10 +17,13 @@ cp -v /etc/resolv.conf builddir/etc
 if [[ "$LOCALREPO" == "YES" ]]
 then
 
-echo "$LOCALREPOIP umvirt.com" >> builddir/etc/hosts
+cp -v builddir/etc/profile.d/ulfs.sh builddir/root/ulfs.sh.bak
+
+sed -i "s/umvirt.com/$LOCALREPOIP/" builddir/etc/profile.d/ulfs.sh
 
 fi
 
+cp -v packages/uname.sh builddir/sources
 cp -v packages/$1.sh builddir/sources
 
 sleep 10
@@ -32,6 +35,13 @@ sleep 10
 #Restore original resolv.conf
 mv -v  builddir/etc/resolv.conf.real builddir/etc/resolv.conf
 mv -v  builddir/etc/hosts.real builddir/etc/hosts
+
+if [[ "$LOCALREPO" == "YES" ]]
+then
+
+mv -v builddir/root/ulfs.sh.bak  builddir/etc/profile.d/ulfs.sh 
+
+fi
 
 ./deletesrc
 ./chrootumount

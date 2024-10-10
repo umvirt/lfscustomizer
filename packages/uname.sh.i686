@@ -1,0 +1,10 @@
+#override uname -m output
+#amd64 can act as i686
+uname()
+  if [ "$#" -eq 1 ] && [ "$1" = -m ]; then
+    echo i686
+  else
+    command uname "$@"
+  fi
+
+export -f uname
