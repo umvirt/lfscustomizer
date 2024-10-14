@@ -34,9 +34,35 @@ Kernel sources is placed on */usr/src*
 
 ### LFS Customization
 
-Just run *autoconfig* script.
+To customize LFS instance just run *autoconfig* script.
 
 ### Install packages set
+
+Packages set installation is needed to produce disk images.
+
+In order to avoid redundancy package testing and reducing cost package sets should be created in sequential order 
+
+* console
+* x
+* lxde
+* mate
+* xfce
+
+Each next set contain packages from previous set.
+
+#### Preparation
+
+Before installing packages sets edit env.sh file
+
+You can use your own local repository to speedup source package bulding and to protect building proccess from third-party influence.
+
+Set "YES" as LOCALREPO value and set your ULFS local repo IP-address on LOCALREPOIP value.
+
+If you wish to install i686 packages while runing amd64 environment rename file uname.sh.i686 in packages directory to uname.sh.
+
+This file contain BASH-script that prevent packages from detecting an amd64 build environment by *uname -m* command.
+
+#### Installation
 
 To install packages use *installpackages* script.
 
@@ -50,8 +76,26 @@ Example
 
 This script is install console packages set
 
-### Local repository support
+#### Validation
 
-If you wan to install packages from local repository edit env.sh file.
+You can run *zeropackages* script to display packages without installed files.
 
-Set "YES" as LOCALREPO value and set your ULFS local repo IP-address on LOCALREPOIP value.
+#### Finalization
+
+If packages set installation performed inside Virtual Machine it's possible to run script that builds and compress disk images.
+
+Sample contents of such file
+
+    qemu-img convert -O qcow2 x.img x.qcow2
+    pigz -k x.qcow2
+    pigz -k x.img
+    beep
+
+Just run this script on host machine when validation is complete.
+
+Sample script mentioned before is also create aditional disk image. 
+It's possible run second virtual machine on that disk image to perform aditional checks while firsh virtual machine with build environment is runing when script is finished.
+
+If something went wrong and you wish to rollback you have to shutdown virtual machine with build environment before restoring disk image because virtual machine is caching disk contents in memory.
+
+
