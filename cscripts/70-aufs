@@ -9,9 +9,9 @@ exit
 
 fi
 
-tar -xf aufs-6.10.tar.gz
+tar -xf aufs-6.13.tar.gz
 
-cd aufs-6.10
+cd aufs-6.13
 
 cat > aufs_install << "EAF"
 

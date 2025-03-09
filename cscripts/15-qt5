@@ -1,5 +1,0 @@
-cat > /etc/profile.d/qt5.sh << EOF
-QT5PREFIX="/opt/qt5"
-export QT5PREFIX
-EOF
-chmod 644 /etc/profile.d/qt5.sh
