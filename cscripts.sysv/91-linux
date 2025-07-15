@@ -1,0 +1,93 @@
+. /cscripts/env.sh
+
+cd /usr/src/linux-6.13.4
+
+#FORCING ARCH 
+ARCH=""
+
+if [[ "$LFS_TGT" == "i486-lfs-linux-gnu" ]]
+then
+
+ARCH="ARCH=i386"
+cp -v /sources/config.i486 .config
+
+fi
+
+if [[ "$LFS_TGT" == "i586-lfs-linux-gnu" ]]
+then
+
+ARCH="ARCH=i386"
+cp -v /sources/config.i586 .config
+
+fi
+
+if [[ "$LFS_TGT" == "i686-lfs-linux-gnu" ]]
+then
+
+ARCH="ARCH=i386"
+cp -v /sources/config.i686 .config
+
+fi
+
+
+if [[ "$LFS_TGT" == "x86_64-lfs-linux-gnu" ]]
+then
+
+cp -v /sources/config.amd64 .config
+
+fi
+
+if [[ "$KERNEL_AUFS" != "YES" ]]
+then
+
+#reinstall headers
+
+make mrproper
+
+make headers
+find usr/include -type f ! -name '*.h' -delete
+cp -rv usr/include $LFS/usr
+
+
+echo "$ARCH make" >> kernelbuilder
+
+echo "$ARCH make modules_install" >> kernelbuilder
+
+chmod +x kernelbuilder
+
+cat kernelbuilder
+
+./kernelbuilder
+
+else
+
+../aufs/aufs_install
+
+echo "$ARCH make modules_install" >> kernelbuilder
+
+chmod +x kernelbuilder
+
+cat kernelbuilder
+
+./kernelbuilder
+
+fi
+
+
+cp -v arch/x86/boot/bzImage /boot/vmlinuz
+
+cp -v System.map /boot/System.map
+
+cp -v .config /boot/config
+
+install -v -m755 -d /etc/modprobe.d
+
+cat > /etc/modprobe.d/usb.conf << "EOF"
+# Begin /etc/modprobe.d/usb.conf
+
+install ohci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i ohci_hcd ; true
+install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
+
+# End /etc/modprobe.d/usb.conf
+EOF
+

@@ -1,0 +1,10 @@
+#delete ending
+"/\# End/d" -i /etc/inittab
+
+#add lines and ending
+cat >> /etc/inittab << "EOF"
+
+T0:2345:respawn:/sbin/agetty ttyS0 9600
+
+# End /etc/inittab
+EOF

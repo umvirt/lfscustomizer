@@ -1,0 +1,7 @@
+. /cscripts/env.sh
+
+cd /sources
+
+chmod +x chimp
+
+cp -v chimp /usr/bin

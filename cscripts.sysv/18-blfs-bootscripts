@@ -1,0 +1,8 @@
+. /cscripts/env.sh
+
+cd /sources
+
+tar -xf blfs-bootscripts-20250225.tar.xz
+
+cp -rv blfs-bootscripts-20250225 /usr/share/blfs-bootscripts
+

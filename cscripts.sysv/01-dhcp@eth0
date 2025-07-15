@@ -1,0 +1,12 @@
+#Force DHCP
+cat > /etc/sysconfig/ifconfig.eth0 << "EOF"
+ONBOOT="yes"
+IFACE="eth0"
+SERVICE="dhcpcd"
+DHCP_START="-b -q -h $HOSTNAME"
+DHCP_STOP="-k"
+EOF
+
+#Force using eth0
+#https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/
+ln -s /dev/null /etc/udev/rules.d/80-net-setup-link.rules

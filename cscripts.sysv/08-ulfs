@@ -1,0 +1,23 @@
+cat > /etc/profile.d/ulfs.sh << "EOF"
+export UMVIRT_RELEASE=0.2.3
+export UMVIRT_ASSISTANT_URL=https://umvirt.com/linux/assistant/
+export UMVIRT_PACKAGES_URL=https://umvirt.com/linux/packages/
+export ULFS_CONFIG_FILE=/etc/ulfs-packages/config
+export MAKEFLAGS="-j`nproc`"
+export NINJAJOBS=`nproc`
+EOF
+
+mkdir -v /etc/ulfs-packages
+
+cat > /etc/ulfs-packages/config << "EOF"
+export ULFS_PKG_DOCUMENTATION=NO
+export ULFS_PKG_STATIC=NO
+export ULFS_PKG_TEST=NO
+export ULFS_PKG_DATERESET=NO
+
+export ULFS_ICECC=NO
+export ULFS_ICECC_PATH=/usr/lib/icecream/bin
+
+EOF
+
+

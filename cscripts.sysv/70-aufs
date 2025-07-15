@@ -1,0 +1,74 @@
+. /cscripts/env.sh
+
+cd /sources
+
+if [[ "$KERNEL_AUFS" != "YES" ]]
+then
+
+exit
+
+fi
+
+tar -xf aufs-6.13.tar.gz
+
+cd aufs-6.13
+
+cat > aufs_install << "EAF"
+
+patch -p1 < ../aufs/aufs6-kbuild.patch
+patch -p1 < ../aufs/aufs6-base.patch
+patch -p1 < ../aufs/aufs6-mmap.patch
+cp -rv ../aufs/Documentation .
+cp -rv ../aufs/fs .
+cp -rv ../aufs/include .
+
+#enable aufs
+echo "CONFIG_AUFS_FS=y" >> .config
+
+#enable squashfs
+echo "CONFIG_SQUASHFS=m" >> .config
+echo "CONFIG_SQUASHFS_ZLIB=y" >> .config
+echo "CONFIG_SQUASHFS_LZ4=y" >> .config
+echo "CONFIG_SQUASHFS_LZO=y" >> .config
+echo "CONFIG_SQUASHFS_XZ=y" >> .config
+echo "CONFIG_SQUASHFS_ZSTD=y" >> .config
+
+#FORCING ARCH 
+ARCH=""
+
+if [[ "$LFS_TGT" == "i586-lfs-linux-gnu" ]]
+then
+
+ARCH="ARCH=i386" 
+
+fi
+
+
+if [[ "$LFS_TGT" == "i686-lfs-linux-gnu"  ]]
+then
+
+ARCH="ARCH=i386" 
+
+fi
+
+#bugfix
+#sed: can't read modules.order: No such file or directory
+echo "sed \"s/CONFIG_SYSTEM_TRUSTED_KEYS/\\#CONFIG_SYSTEM_TRUSTED_KEYS/\" -i .config " > aufskernelbuilder
+
+
+echo "yes '' | $ARCH make" >> aufskernelbuilder
+
+
+echo "$ARCH make headers_install" >> aufskernelbuilder
+chmod +x aufskernelbuilder
+./aufskernelbuilder
+
+
+cp -rv usr/include /usr
+
+EAF
+
+chmod +x aufs_install
+
+mkdir -v /usr/src/aufs
+cp -rv * /usr/src/aufs

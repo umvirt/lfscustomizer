@@ -1,3 +1,5 @@
 aufs-6.13.tar.gz
+blfs-bootscripts-20250225.tar.xz
 chimp
+dhcpcd-10.2.2.tar.xz
 wget-1.25.0.tar.gz
