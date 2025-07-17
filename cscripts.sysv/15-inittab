@@ -1,5 +1,5 @@
 #delete ending
-"/\# End/d" -i /etc/inittab
+sed "/\# End/d" -i /etc/inittab
 
 #add lines and ending
 cat >> /etc/inittab << "EOF"
