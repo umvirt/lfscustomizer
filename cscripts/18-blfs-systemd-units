@@ -1,0 +1,8 @@
+. /cscripts/env.sh
+
+cd /sources
+
+tar -xf blfs-systemd-units-20241211.tar.xz
+
+cp -rv blfs-systemd-units-20241211 /usr/share/blfs-systemd-units
+
