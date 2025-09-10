@@ -1,3 +1,5 @@
+#source: LFS chapter 9.6
+
 cat > /etc/vconsole.conf << "EOF"
 KEYMAP=us
 FONT=Lat2-Terminus16

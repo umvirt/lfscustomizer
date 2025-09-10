@@ -1,3 +1,5 @@
+#source: LFS chapter 9.6
+
 cat > /etc/sysconfig/console << "EOF"
 # Begin /etc/sysconfig/console
 

@@ -1,3 +1,5 @@
+#source: LFS chapter 9.9
+
 cat > /etc/shells << "EOF"
 # Begin /etc/shells
 

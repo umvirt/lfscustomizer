@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf dhcpcd-10.2.2.tar.xz
+tar -xf dhcpcd-10.2.4.tar.xz
 
-cd dhcpcd-10.2.2
+cd dhcpcd-10.2.4
 
 install  -v -m700 -d /var/lib/dhcpcd &&
 

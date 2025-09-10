@@ -1,3 +1,5 @@
+#source: LFS chapter 9.2
+
 #Force DHCP
 cat > /etc/systemd/network/10-eth-dhcp.network << "EOF"
 [Match]

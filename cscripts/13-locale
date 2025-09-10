@@ -1,3 +1,5 @@
+#source: LFS chapter 9.7
+
 cat > /etc/locale.conf << "EOF"
 LANG=en_US.utf8
 LC_CTYPE=en_US.utf8

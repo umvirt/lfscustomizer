@@ -1,5 +1,6 @@
-aufs-6.13.tar.gz
+aufs-6.16.tar.gz
 blfs-bootscripts-20250225.tar.xz
+blfs-systemd-units-20241211.tar.xz
 chimp
-dhcpcd-10.2.2.tar.xz
+dhcpcd-10.2.4.tar.xz
 wget-1.25.0.tar.gz

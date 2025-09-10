@@ -1,5 +1,5 @@
 cat > /etc/profile.d/ulfs.sh << "EOF"
-export UMVIRT_RELEASE=0.2.3
+export UMVIRT_RELEASE=0.2.4
 export UMVIRT_ASSISTANT_URL=https://umvirt.com/linux/assistant/
 export UMVIRT_PACKAGES_URL=https://umvirt.com/linux/packages/
 export ULFS_CONFIG_FILE=/etc/ulfs-packages/config

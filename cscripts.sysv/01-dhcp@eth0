@@ -1,3 +1,5 @@
+#source: BLFS chapter 14 "dhcpcd"
+
 #Force DHCP
 cat > /etc/sysconfig/ifconfig.eth0 << "EOF"
 ONBOOT="yes"

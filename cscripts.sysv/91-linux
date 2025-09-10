@@ -1,6 +1,6 @@
 . /cscripts/env.sh
 
-cd /usr/src/linux-6.13.4
+cd /usr/src/linux-6.16.1
 
 #FORCING ARCH 
 ARCH=""

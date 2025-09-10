@@ -1,2 +1,4 @@
+#source: LFS chapter 9.2
+
 echo "ulfs" > /etc/hostname
 

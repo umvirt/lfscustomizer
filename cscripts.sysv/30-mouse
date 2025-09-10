@@ -1,3 +1,5 @@
+#source: BLFS chapter 12 "GPM"
+
 cat > /etc/sysconfig/mouse << "EOF"
 
 MDEVICE="/dev/input/mice"

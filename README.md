@@ -1,8 +1,8 @@
 # Umvirt LFS Customizer
 
-ULFS Version: 0.2.3
+ULFS Version: 0.2.4
 
-LFS Version: 12.3-systemd
+LFS Version: 12.4-systemd
 
 License: GPL
 

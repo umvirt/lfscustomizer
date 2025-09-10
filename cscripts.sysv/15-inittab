@@ -1,3 +1,5 @@
+#Add serial console login support
+
 #delete ending
 sed "/\# End/d" -i /etc/inittab
 

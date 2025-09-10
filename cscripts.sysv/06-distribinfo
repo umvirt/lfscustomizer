@@ -1,10 +1,12 @@
+#source: LFS chapter 11.1
+
 #lfs-release
-echo 12.3-systemd > /etc/lfs-release
+echo 12.4-systemd > /etc/lfs-release
 
 #lsb
 cat > /etc/lsb-release << "EOF"
 DISTRIB_ID="UmVirt Linux From Scratch"
-DISTRIB_RELEASE="0.2.3"
+DISTRIB_RELEASE="0.2.4"
 DISTRIB_CODENAME="Duckling"
 DISTRIB_DESCRIPTION="UmVirt Linux From Scratch"
 EOF
@@ -12,9 +14,9 @@ EOF
 #os
 cat > /etc/os-release << "EOF"
 NAME="UmVirt Linux From Scratch"
-VERSION="0.2.3"
+VERSION="0.2.4"
 ID=lfs
-PRETTY_NAME="UmVirt Linux From Scratch 0.2.3 Duckling"
+PRETTY_NAME="UmVirt Linux From Scratch 0.2.4 Duckling"
 VERSION_CODENAME="Duckling"
 EOF
 
