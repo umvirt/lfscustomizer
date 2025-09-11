@@ -1,0 +1,174 @@
+#!/bin/bash
+
+# Read config file
+. config/config.sh
+# Get values
+. data/configparser.sh
+
+echo -e "Preparing for customizing $LFS_TARGET_ARCH disk image...\n"
+
+echo -e "Unmounting build/builddir mount point...\n"
+
+umount build/builddir
+echo
+echo -e "Deleting buid directory contents...\n"
+rm -rfv build/*
+echo
+
+if [[ $LFS_TARGET_ARCH = "amd64" ]]
+then
+echo "Preparing for customizing amd64..."
+fi
+
+if [[ $LFS_TARGET_ARCH = "i686" ]]
+then
+echo "Preparing for customizing i686..."
+fi
+
+if [[ $LFS_TARGET_ARCH = "i586" ]]
+then
+echo "Preparing for customizing i586..."
+fi
+
+echo -e "Copying main scripts... \n"
+cp -v data/stages/* build/
+echo
+
+echo -e "Copying packages scripts... \n"
+cp -rv data/packages build/
+echo
+
+echo -e "Copying kernel config files... \n"
+cp -rv data/kernel build/
+echo
+
+
+if [[ $LFS_TARGET_ARCH != "amd64" ]]
+then
+echo -e "Activating hack to override uname -m command output... \n"
+echo '#override uname -m output' > build/pachages/uname.sh
+echo "#amd64 can act as $LFS_TARGET_ARCH" >> build/pachages/uname.sh
+echo 'uname()'  >> build/pachages/uname.sh
+echo '  if [ "$#" -eq 1 ] && [ "$1" = -m ]; then'  >> build/pachages/uname.sh
+echo "echo $LFS_TARGET_ARCH"  >> build/pachages/uname.sh
+echo '  else'  >> build/pachages/uname.sh
+echo '    command uname "$@"'  >> build/pachages/uname.sh
+echo 'fi'  >> build/pachages/uname.sh
+chmod -v 777 build/pachages/uname.sh
+echo
+fi
+
+
+
+
+#echo -e "Copying main user scripts...  \n"
+#cp -rfv data/scripts build
+#echo
+if [[ $LFS_TARGET_INIT = "sysv" ]]
+then
+echo -e "Copying SysV specific chroot scripts ...\n"
+cp -rfv data/cscripts.sysv build/cscripts
+echo
+fi
+
+if [[ $LFS_TARGET_INIT = "systemd" ]]
+then
+echo -e "Copying Systemd specific chroot scripts ...\n"
+cp -rfv data/cscripts.systemd build/cscripts
+echo
+fi
+
+echo -e "Writing config file 'env.sh'...\n"
+echo '#Configuration file for scripts to run on host as root' > build/env.sh
+echo  >> build/env.sh
+echo 'PWD=`pwd`' >> build/env.sh
+echo 'LFS="$PWD/builddir"' >> build/env.sh
+echo 'MAKEFLAGS="-j`nproc`"' >> build/env.sh
+echo "LOCALREPO=\"$LOCALREPO\"" >>  build/env.sh
+echo "SOURCESDISK=\"$SOURCESDISK\"" >>  build/env.sh
+echo "FORMATSOURCESDISK=\"$FORMATSOURCESDISK\"" >>  build/env.sh
+echo  >> build/env.sh
+echo 'echo $LFS' >> build/env.sh
+echo  >> build/env.sh
+echo 'export PWD LFS MAKEFLAGS LOCALREPO SOURCESDISK FOROMATSOURCESDISK' >> build/env.sh
+
+echo '---'
+cat build/env.sh
+echo '---'
+echo
+
+echo -e "Creating directory 'cscripts.config'...\n"
+
+mkdir -v 'build/cscripts.config'
+
+echo -e "Writing config file 'cscripts.config/config.sh'...\n"
+
+cat >> build/cscripts.config/config.sh << "EOF"
+ULFS_TESTS="NO"
+ULFS_CRITICAL_TESTS="NO"
+ULFS_DOCS="NO"
+
+KERNEL_AUFS="YES"
+
+MAKEFLAGS="-j`nproc`"
+NINJAJOBS=`nproc`
+EOF
+
+echo '---'
+cat build/cscripts.config/config.sh
+echo '---'
+
+echo -e "Writing config file 'cscripts.config/env.sh'...\n"
+
+cat > build/cscripts.config/env.sh << "EOF"
+. /cscripts/config.sh
+PATH=/usr/bin:/usr/sbin
+LC_ALL=POSIX
+EOF
+
+
+if [[ $LFS_TARGET_ARCH = "amd64" ]]
+then
+
+echo 'LFS_TGT=$(uname -m)-lfs-linux-gnu' >> build/cscripts.config/env.sh
+
+else
+
+echo "LFS_TGT=$LFS_TARGET_ARCH-lfs-linux-gnu" >> build/cscripts.config/env.sh
+
+fi
+
+cat >> build/cscripts.config/env.sh << "EOF"
+LANG=C
+export PATH LANG ULFS_TESTS ULFS_CRITICAL_TESTS ULFS_DOCS NINJAJOBS MAKEFLAGS LFS_TGT KERNEL_AUFS
+PWD=`pwd`
+echo "PWD DIR: $PWD"
+echo "RUN TESTS: $ULFS_TESTS"
+echo "RUN CRITICAL TESTS: $ULFS_CRITICAL_TESTS"
+echo "INSTALL DOCUMENTATION: $ULFS_DOCS"
+echo
+echo "MAKE FLAGS: $MAKEFLAGS"
+echo "NINJA THREADS: $NINJAJOBS"
+
+sleep 1
+EOF
+
+echo '---'
+cat build/cscripts.config/env.sh
+echo '---'
+
+echo -e "\nCreating symlink to sources directory\n"
+
+ln -sv ../src build/src
+
+echo -e "\nCreating directories...\n"
+mkdir -v build/{builddir,log,tmp}
+
+echo -e "\nSetting permissions...\n"
+
+chmod -v 777 build/{builddir,log,tmp}
+chmod -v 777 build/{env.sh,cscripts.config/{config.sh,env.sh}}
+
+echo -e "\nBuild directory created\n"
+
+

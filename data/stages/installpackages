@@ -1,0 +1,72 @@
+PKGSET=$1
+echo $PKGSET
+sleep 10
+
+. env.sh
+
+mount /dev/sda1 builddir
+
+if [[ "$SOURCESDISK" != "" ]]
+then
+
+if [[ "$FORMATSOURCESDISK" == "YES" ]]
+then
+
+mkfs.ext4 -F $SOURCESDISK
+
+fi
+
+mount $SOURCESDISK builddir/sources
+
+fi
+
+./chrootmount
+
+#Backup original resolv.conf
+mv -v builddir/etc/resolv.conf builddir/etc/resolv.conf.real
+cp -v builddir/etc/hosts builddir/etc/hosts.real
+
+#Create fake resolv.conf
+cp -v /etc/resolv.conf builddir/etc
+#Create fake hosts file
+if [[ "$LOCALREPO" != "" ]]
+then
+
+cp -v builddir/etc/profile.d/ulfs.sh builddir/root/ulfs.sh.bak
+
+sed -i "s/umvirt.com/$LOCALREPO/" builddir/etc/profile.d/ulfs.sh
+
+fi
+
+cp -v packages/uname.sh builddir/sources
+cp -v packages/$1.sh builddir/sources
+
+sleep 10
+
+./chrootcmd ./sources/$1.sh
+
+sleep 10
+
+#Restore original resolv.conf
+mv -v  builddir/etc/resolv.conf.real builddir/etc/resolv.conf
+mv -v  builddir/etc/hosts.real builddir/etc/hosts
+
+if [[ "$LOCALREPO" != "" ]]
+then
+
+mv -v builddir/root/ulfs.sh.bak  builddir/etc/profile.d/ulfs.sh 
+
+fi
+
+./deletesrc
+./chrootumount
+
+if [[ "$SOURCESDISK" != "" ]]
+then
+
+umount $SOURCESDISK
+
+fi
+
+./finish
+

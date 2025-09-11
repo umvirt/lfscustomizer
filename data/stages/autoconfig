@@ -1,0 +1,11 @@
+mount /dev/sda1 builddir
+./chrootmount
+./copysrc
+./runchrootscripts
+./deletesrc
+./chrootumount
+./finish
+
+#copy customizer log
+mkdir -p builddir/var/log/lfscustomizer
+cp -rv log/* builddir/var/log/lfscustomizer

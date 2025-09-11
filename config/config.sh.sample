@@ -1,0 +1,45 @@
+#
+# UmVirt LFS Customizer Configuration file
+# ----------------------------------------
+#
+# Target architecture
+#
+# Possible values: "amd64", "i686", "i586"
+# Default: "amd64"
+#
+LFS_TARGET_ARCH=
+#
+# Target init 
+#
+# Possible values: "sysv", "systemd"
+# Default: "systemd"
+#
+LFS_TARGET_INIT=
+#
+# Local repository
+#
+# Local repository to install packages.
+# Default repository is used if empty value.
+#
+# Possible values: IP-address, hostname
+# Default: ""
+#
+LOCALREPO=
+#
+# SourcesDisk
+#
+# Optional. Use additionak disk to mount in "/sources" directory
+#
+# Possible values: path to device ("/dev/sdb","/dev/vdb")
+# Default: ""
+#
+SOURCESDISK=
+#
+# SourcesDisk
+#
+# Clean up SourcesDisk by formating it.
+#
+# Possible values: "YES","NO"
+# Default: "YES"
+#
+FORMATSOURCESDISK="YES"

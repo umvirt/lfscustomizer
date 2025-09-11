@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Read config file
+. config/config.sh
+# Get values
+. data/configparser.sh
+
+echo -e "\nUmVirt LFS Customizer configuration"
+echo -e "-------------------------------------\n"
+
+echo "Target architecture: $LFS_TARGET_ARCH"
+echo "Target init system: $LFS_TARGET_INIT"
+echo
+echo "Local repository: $LOCALREPO"
+echo "SourcesDisk: $SOURCESDISK"
+echo "Format SourcesDisk: $FORMATSOURCESDISK"
+
+echo
