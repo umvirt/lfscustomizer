@@ -28,7 +28,50 @@ This software is aimed to experienced Linux From Scratch maintainers.
 ## Hardware support
 
 ULFS have very limited hardware support because LFS Customizer don't contain kernel configuration file. Make your own for your needs.
-Kernel sources is placed on */usr/src*
+Kernel sources is placed on */data/kernel*
+
+## Preparation
+
+### Downloading LFSCustomizer
+
+Use *Git* to download LFSCustomizer:
+
+    git clone https://gitlab.com/Umvirt/lfscustomizer
+
+After downloading via *Git* you have to make somedirectories:
+
+    make dirs
+
+### Configuration
+
+You can use "config/config.sh" file to set configuration options.
+
+If file is not available copy config file template.
+
+    cd config
+    cp config.sh.sample config.sh
+
+After editing config.sh file check configuration with dumpconfig script:
+
+    ./dumpconfig
+
+Sample dumpconfig output:
+
+
+    Target architecture: amd64
+    Target init system: systemd
+    
+    Local repository: 
+    SourcesDisk: 
+    Format SourcesDisk: YES
+
+### Configuration environment init
+
+Build directory should be created according to config file before running customization.
+
+To init environment run:
+
+    ./envinit
 
 ## Running
 
