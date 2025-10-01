@@ -13,6 +13,7 @@ echo "Target init system: $LFS_TARGET_INIT"
 echo
 echo "Local repository: $LOCALREPO"
 echo "SourcesDisk: $SOURCESDISK"
-echo "Format SourcesDisk: $FORMATSOURCESDISK"
-
+echo "SourcesDisk formatting: $FORMATSOURCESDISK"
+echo
+echo "Zerofill: $ZEROFILL"
 echo

@@ -35,11 +35,21 @@ LOCALREPO=
 #
 SOURCESDISK=
 #
-# SourcesDisk
+# SourcesDisk formatting
 #
-# Clean up SourcesDisk by formating it.
+# Optional. Clean up SourcesDisk by formating it.
 #
 # Possible values: "YES","NO"
 # Default: "YES"
 #
 FORMATSOURCESDISK="YES"
+#
+# Zerofill
+#
+# Fill free disk space with zeroes to reduce a disk image archive file size
+#
+# Possible values: "YES","NO"
+# Default: "YES"
+#
+ZEROFILL="YES"
+

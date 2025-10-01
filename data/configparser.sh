@@ -12,3 +12,8 @@ then
 FORMATSOURCESDISK='YES'
 fi
 
+if [[ $ZEROFILL == "" ]]
+then
+ZEROFILL='YES'
+fi
+

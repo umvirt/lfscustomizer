@@ -3,8 +3,23 @@
 rm -rfv $LFS/cscripts
 rm -rfv $LFS/tmp/*
 
-mkdir $LFS/sources
+#mkdir $LFS/sources
+
+if [[ $ZEROFILL == "YES" ]]
+then
 
 dd if=/dev/zero of=$LFS/zero bs=16384 status=progress
-sleep 5
+
+free -m
+
+#commit filesystem caches to disk
+sync
+
+#clear caches to write all zeroes on disk.
+echo 3 | tee /proc/sys/vm/drop_caches
+
+free -m
+
 rm -v $LFS/zero
+
+fi
