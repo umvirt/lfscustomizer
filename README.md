@@ -77,7 +77,7 @@ To init environment run:
 
 ### LFS Customization
 
-To customize LFS instance just run *autoconfig* script.
+To customize LFS disk image according to config just run *customize* script.
 
 ### Install packages set
 
