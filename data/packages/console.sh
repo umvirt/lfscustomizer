@@ -7,6 +7,7 @@ fi
 uname -m
 sleep 30
 
+chimp install wget
 chimp install mc
 chimp install nano
 chimp install openssh
