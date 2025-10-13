@@ -46,7 +46,8 @@ FORMATSOURCESDISK="YES"
 #
 # Zerofill
 #
-# Fill free disk space with zeroes to reduce a disk image archive file size
+# Fill disk free space with zeroes to reduce a disk image archive file size 
+# after customization and installing packages.
 #
 # Possible values: "YES","NO"
 # Default: "YES"

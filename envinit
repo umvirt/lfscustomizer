@@ -87,10 +87,11 @@ echo 'MAKEFLAGS="-j`nproc`"' >> build/env.sh
 echo "LOCALREPO=\"$LOCALREPO\"" >>  build/env.sh
 echo "SOURCESDISK=\"$SOURCESDISK\"" >>  build/env.sh
 echo "FORMATSOURCESDISK=\"$FORMATSOURCESDISK\"" >>  build/env.sh
+echo "ZEROFILL=\"$ZEROFILL\"" >>  build/env.sh
 echo  >> build/env.sh
 echo 'echo $LFS' >> build/env.sh
 echo  >> build/env.sh
-echo 'export PWD LFS MAKEFLAGS LOCALREPO SOURCESDISK FOROMATSOURCESDISK' >> build/env.sh
+echo 'export PWD LFS MAKEFLAGS LOCALREPO SOURCESDISK FOROMATSOURCESDISK ZEROFILL' >> build/env.sh
 
 echo '---'
 cat build/env.sh
