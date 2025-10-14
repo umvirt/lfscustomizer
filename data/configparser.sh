@@ -1,3 +1,9 @@
+if [[ $LFS_PARTITION == "" ]]
+then
+    echo "ERROR: Target partition is not defined"
+    exit
+fi
+
 if [[ $LFS_TARGET_ARCH == "" ]]
 then
 LFS_TARGET_ARCH='amd64'

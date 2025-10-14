@@ -2,6 +2,20 @@
 # UmVirt LFS Customizer Configuration file
 # ----------------------------------------
 #
+# Taget partition
+#
+# LFS root partition (filesystem) full path for customization.
+# ULFS root partition (filesystem) full path for installing packages.
+#
+# Possible values:
+# - Filesystem on disk: /dev/sda, /dev/vda
+# - Filesystem on logical volume: /dev/volumegroup/logicalvolume
+# - Disk partition: /dev/sda1, /dev/vda1
+# - Partition on device mapper: /dev/mapper/logicalvolumep1 
+# Default: ""
+#
+LFS_PARTITION=
+#
 # Target architecture
 #
 # Possible values: "amd64", "i686", "i586"

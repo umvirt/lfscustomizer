@@ -7,11 +7,13 @@
 
 echo -e "\nUmVirt LFS Customizer configuration"
 echo -e "-------------------------------------\n"
-
+echo
+echo "Target partition: $LFS_PARTITION"
 echo "Target architecture: $LFS_TARGET_ARCH"
 echo "Target init system: $LFS_TARGET_INIT"
 echo
 echo "Local repository: $LOCALREPO"
+echo
 echo "SourcesDisk: $SOURCESDISK"
 echo "SourcesDisk formatting: $FORMATSOURCESDISK"
 echo

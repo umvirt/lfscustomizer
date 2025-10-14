@@ -1,2 +1,13 @@
+if [ ! -f build/installpackages ]
+then
+
+echo "ERROR: ULFS build environment is not initialized!"
+echo
+echo "Run envinit script first!"
+echo
+exit
+
+fi
+
 cd build
 ./installpackages "$@"

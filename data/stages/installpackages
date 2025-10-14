@@ -4,7 +4,7 @@ sleep 10
 
 . env.sh
 
-mount /dev/sda1 builddir
+mount $LFS_PARTITION builddir
 
 if [[ "$SOURCESDISK" != "" ]]
 then
@@ -38,7 +38,13 @@ sed -i "s/umvirt.com/$LOCALREPO/" builddir/etc/profile.d/ulfs.sh
 
 fi
 
+if [ -f packages/uname.sh ];
+then
+
 cp -v packages/uname.sh builddir/sources
+
+fi
+
 cp -v packages/$1.sh builddir/sources
 
 sleep 10

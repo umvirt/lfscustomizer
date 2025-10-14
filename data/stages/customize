@@ -1,9 +1,41 @@
-mount /dev/sda1 builddir
+. env.sh
+
+mount $LFS_PARTITION builddir
+
+mkdir -v $LFS/sources
+chmod -v a+wt $LFS/sources
+
+
+if [[ "$SOURCESDISK" != "" ]]
+then
+
+if [[ "$FORMATSOURCESDISK" == "YES" ]]
+then
+
+mkfs.ext4 -F $SOURCESDISK
+
+fi
+
+mount $SOURCESDISK builddir/sources
+
+fi
+
+
+
 ./chrootmount
 ./copysrc
 ./runchrootscripts
 ./deletesrc
 ./chrootumount
+
+
+if [[ "$SOURCESDISK" != "" ]]
+then
+
+umount $SOURCESDISK
+
+fi
+
 ./finish
 
 #copy customizer log
