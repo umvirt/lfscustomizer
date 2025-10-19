@@ -42,19 +42,22 @@ echo -e "Copying kernel config files... \n"
 cp -rv data/kernel build/
 echo
 
-
+#HACK: uname override script
+#needed for libgcrypt and other packages x86 build on amd64 CPUs without cross-compilation or emulation
+#script source: https://unix.stackexchange.com/questions/587047/how-do-i-change-the-output-of-uname-m
 if [[ $LFS_TARGET_ARCH != "amd64" ]]
 then
 echo -e "Activating hack to override uname -m command output... \n"
-echo '#override uname -m output' > build/pachages/uname.sh
-echo "#amd64 can act as $LFS_TARGET_ARCH" >> build/pachages/uname.sh
-echo 'uname()'  >> build/pachages/uname.sh
-echo '  if [ "$#" -eq 1 ] && [ "$1" = -m ]; then'  >> build/pachages/uname.sh
-echo "echo $LFS_TARGET_ARCH"  >> build/pachages/uname.sh
-echo '  else'  >> build/pachages/uname.sh
-echo '    command uname "$@"'  >> build/pachages/uname.sh
-echo 'fi'  >> build/pachages/uname.sh
-chmod -v 777 build/pachages/uname.sh
+echo '#override uname -m output' > build/packages/uname.sh
+echo "#amd64 can act as $LFS_TARGET_ARCH" >> build/packages/uname.sh
+echo 'uname()'  >> build/packages/uname.sh
+echo '  if [ "$#" -eq 1 ] && [ "$1" = -m ]; then'  >> build/packages/uname.sh
+echo "    echo $LFS_TARGET_ARCH"  >> build/packages/uname.sh
+echo '  else'  >> build/packages/uname.sh
+echo '    command uname "$@"'  >> build/packages/uname.sh
+echo 'fi'  >> build/packages/uname.sh
+echo 'export -f uname' >> build/packages/uname.sh
+chmod -v 777 build/packages/uname.sh
 echo
 fi
 
