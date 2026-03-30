@@ -2,7 +2,7 @@
 
 cd /sources
 
-tar -xf blfs-systemd-units-20241211.tar.xz
+tar -xf blfs-systemd-units-20251204.tar.xz
 
-cp -rv blfs-systemd-units-20241211 /usr/share/blfs-systemd-units
+cp -rv blfs-systemd-units-20251204 /usr/share/blfs-systemd-units
 

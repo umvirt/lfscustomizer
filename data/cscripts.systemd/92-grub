@@ -9,7 +9,7 @@ insmod part_gpt
 insmod ext2
 set root=(hd0,1)
 
-menuentry "Umvirt Linux From Scratch 0.2.4" {
+menuentry "Umvirt Linux From Scratch 0.3" {
         linux   /boot/vmlinuz root=/dev/sda1 ro loglevel=3 console=ttyS0 console=tty0
 }
 EOF
@@ -32,7 +32,7 @@ if loadfont /boot/grub/fonts/unicode.pf2; then
   terminal_output gfxterm
 fi
 
-menuentry "Umvirt Linux From Scratch 0.2.4" {
+menuentry "Umvirt Linux From Scratch 0.3" {
         linux   /boot/vmlinuz root=/dev/sda1 ro console=ttyS0 console=tty0
 }
 
