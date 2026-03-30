@@ -16,6 +16,21 @@
 #
 LFS_PARTITION=
 #
+# Running partition (in running environment context).
+# Used for GRUB MBR installation.
+#
+# LFS root partition (filesystem) full path for customization.
+# ULFS root partition (filesystem) full path for installing packages.
+#
+# Possible values:
+# - Filesystem on disk: /dev/sda, /dev/vda
+# - Filesystem on logical volume: /dev/volumegroup/logicalvolume
+# - Disk partition: /dev/sda1, /dev/vda1
+# - Partition on device mapper: /dev/mapper/logicalvolumep1
+# Default: "/dev/sda1"
+#
+LFS_RUNNING_PARTITION=
+#
 # Target architecture
 #
 # Possible values: "amd64", "i686", "i586"
@@ -29,6 +44,32 @@ LFS_TARGET_ARCH=
 # Default: "systemd"
 #
 LFS_TARGET_INIT=
+#
+# GRUB Master Boot Record (MBR) bootloader installation.
+#
+# Keep "YES" only if DOS partition table is used and LFS system will be placed
+# on first drive.
+# If other operating system is installed set "NO" to keep installed bootloader.
+#
+# LFS is not support UEFI boot. If you wish to use UEFI at first install LFS
+# to disk with DOS partition table then transfer it to GPT disk according
+# to BLFS instructions.
+#
+# If you wish to use external bootloader (containers, user-mode-linux, VM's)
+# set "NO"
+#
+# Possible values: "YES", "NO"
+# Default: "YES"
+#
+LFS_MBR=
+#
+# Running disk number (in running environment context) from GRUB point of view.
+# Used for GRUB MBR installation.
+#
+# Possible values: integer
+# Default: 0
+#
+LFS_RUNNING_DISK_NUMBER=
 #
 # Local repository
 #

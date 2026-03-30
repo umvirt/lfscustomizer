@@ -177,3 +177,32 @@ chmod -v 777 build/{env.sh,cscripts.config/{config.sh,env.sh}}
 echo -e "\nBuild directory created\n"
 
 
+if [[ $LFS_MBR = "YES" ]]
+then
+
+echo build/cscripts/*-grub
+sed -e "s|/dev/sda1|$LFS_RUNNING_PARTITION|" -i build/cscripts/*-grub
+
+
+
+echo
+echo "Replacing /dev/sda to $LFS_DISK (according to \$LFS_DISK)..."
+echo
+echo build/cscripts/*-grub
+sed -e "s|grub-install /dev/sda|grub-install $LFS_DISK|" -i build/cscripts/*-grub
+echo
+GRUB_ROOT_SRC="(hd0,1)"
+GRUB_ROOT_TGT="(hd$LFS_RUNNING_DISK_NUMBER,$LFS_RUNNING_PARTITION_NUMBER)"
+echo "Replacing $GRUB_ROOT_SRC to $GRUB_ROOT_TGT (according to \$LFS_RUNNING_DISK_NUMBER and \$LFS_RUNNING_PARTITION_NUMBER)..."
+echo
+echo build/cscripts/*-grub
+sed -e "s|$GRUB_ROOT_SRC|$GRUB_ROOT_TGT|" -i build/cscripts/*-grub
+
+else
+
+echo
+echo Deleting GRUB MBR bootloader script
+echo
+rm -v build/cscripts/*-grub
+
+fi
