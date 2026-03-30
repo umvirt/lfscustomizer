@@ -4,7 +4,18 @@ sleep 10
 
 . env.sh
 
+#if partiton exists
+if [ -b  $LFS_PARTITION ] || [ -f $LFS_PARTITION ]
+then
+
 mount $LFS_PARTITION builddir
+
+else
+
+echo "Error: Target partition/file is not found"
+exit
+
+fi
 
 if [[ "$SOURCESDISK" != "" ]]
 then
