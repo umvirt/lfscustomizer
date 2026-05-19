@@ -1,4 +1,4 @@
-aufs-6.16.tar.gz
+aufs-6.18-559ed4fde768ef38007b850ba282e827b8a70448.tar.xz
 blfs-bootscripts-20250225.tar.xz
 blfs-systemd-units-20241211.tar.xz
 chimp
